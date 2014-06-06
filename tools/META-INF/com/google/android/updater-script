@@ -1,0 +1,2 @@
+ui_print("Writing Kernel");
+package_extract_file("boot.img", "/dev/block/mmcblk0p5");
