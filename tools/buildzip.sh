@@ -21,4 +21,6 @@ zip $OUTPUT_DIR/CompiledKernel.zip -r META-INF boot.img
 chown root $OUTPUT_DIR/CompiledKernel.zip
 rm -rf $BUILD_ENV/tmp
 rm -rf $RAMFS_TMP
+rm -rf $RAMFS_TMP.cpio.gz
+echo "ZIP FILE BUILT $(date)" >>$TOOLS_DIR/build.log
 

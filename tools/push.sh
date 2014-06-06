@@ -16,6 +16,7 @@ cd $BUILD_ENV
 echo "Pushing to GIT"
 
 ##Pushing
-git push git@github.com:ricky310711/RTL_KERNEL.git master
+cd $BUILD_ENV
+git push -u origin master
 
 echo "Push to GIT complete"

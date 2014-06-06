@@ -22,6 +22,14 @@ chown root $TOOLS_DIR/build.log
 
 echo "---- Set Parameters ---- 10%"
 
+##Using clean sources
+echo "CLEANING SOURCES $(date)" >>$TOOLS_DIR/build.log
+rm -rf $KERNELDIR
+rm -rf $OUTPUT_DIR/CompiledKernel.zip 
+cp -ax /home/ricky/Desktop/clean_kernel_source $KERNELDIR
+chown --recursive root $KERNELDIR
+echo "CLEAN SOURCES COPIED $(date)" >>$TOOLS_DIR/build.log
+
 ##Compiling zImage
 echo "COMPILING ZIMAGE $(date)" >>$TOOLS_DIR/build.log
 cd $KERNELDIR/
@@ -73,7 +81,6 @@ echo "---- Compiled Boot.img ---- 95%"
 
 ##Building Zip
 echo "BUILDING ZIP FILE $(date)" >>$TOOLS_DIR/build.log
-rm -rf $OUTPUT_DIR/CompiledKernel.zip 
 chown --recursive root $BUILD_ENV/tmp
 cp -ax $TOOLS_DIR/META-INF $BUILD_ENV/tmp
 cd $BUILD_ENV/tmp
@@ -81,8 +88,7 @@ zip $OUTPUT_DIR/CompiledKernel.zip -r META-INF boot.img
 chown root $OUTPUT_DIR/CompiledKernel.zip
 rm -rf $BUILD_ENV/tmp
 rm -rf $RAMFS_TMP
-cd $KERNELDIR/
-make clean && make mrproper
+rm -rf $RAMFS_TMP.cpio.gz
 echo "ZIP FILE BUILT $(date)" >>$TOOLS_DIR/build.log
 
 echo "" >>$TOOLS_DIR/build.log
